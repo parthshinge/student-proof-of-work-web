@@ -16,6 +16,10 @@ async function getProfile(username: string) {
   }
 
   const supabase = await createSupabaseServerClient();
+  if (!supabase) {
+    return null;
+  }
+
   const { data: profile } = await supabase.from("profiles").select("*").eq("username", username).maybeSingle();
 
   if (!profile) {

@@ -11,7 +11,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-export function AuthPage() {
+export function AuthPage({ supabaseConfigured = true }: { supabaseConfigured?: boolean }) {
   const router = useRouter();
   const supabase = useMemo(() => createSupabaseBrowserClient(), []);
   const [mode, setMode] = useState<"login" | "signup">("signup");
@@ -22,6 +22,12 @@ export function AuthPage() {
 
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
+
+    if (!supabaseConfigured || !supabase) {
+      toast.error("Supabase is not configured yet. Add the Vercel environment variables first.");
+      return;
+    }
+
     setLoading(true);
 
     const response =
@@ -70,6 +76,12 @@ export function AuthPage() {
           </div>
         </CardHeader>
         <CardContent>
+          {!supabaseConfigured ? (
+            <div className="mb-4 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+              Supabase is not configured on this deployment yet. Add the Vercel environment variables to enable sign up and login.
+            </div>
+          ) : null}
+
           <form className="space-y-4" onSubmit={handleSubmit}>
             {mode === "signup" ? (
               <div className="space-y-2">
@@ -82,6 +94,7 @@ export function AuthPage() {
                     onChange={(event) => setUsername(event.target.value)}
                     placeholder="yourname"
                     className="pl-11"
+                    disabled={!supabaseConfigured}
                     required
                   />
                 </div>
@@ -99,6 +112,7 @@ export function AuthPage() {
                   onChange={(event) => setEmail(event.target.value)}
                   placeholder="you@college.edu"
                   className="pl-11"
+                  disabled={!supabaseConfigured}
                   required
                 />
               </div>
@@ -115,13 +129,14 @@ export function AuthPage() {
                   onChange={(event) => setPassword(event.target.value)}
                   placeholder="At least 8 characters"
                   className="pl-11"
+                  disabled={!supabaseConfigured}
                   required
                   minLength={8}
                 />
               </div>
             </div>
 
-            <Button type="submit" className="w-full" size="lg" disabled={loading}>
+            <Button type="submit" className="w-full" size="lg" disabled={loading || !supabaseConfigured}>
               {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
               {mode === "signup" ? "Create profile" : "Log in"}
             </Button>

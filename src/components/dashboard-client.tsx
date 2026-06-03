@@ -136,14 +136,30 @@ export function DashboardClient({ user, initialData }: { user: User; initialData
     setProfileForm(emptyProfileForm(initialData.profile));
   }, [initialData]);
 
+  if (!supabase) {
+    return (
+      <main className="container-shell flex min-h-[calc(100vh-4rem)] items-center justify-center py-16">
+        <Card className="w-full max-w-2xl">
+          <CardHeader>
+            <CardTitle>Supabase setup required</CardTitle>
+            <CardDescription>
+              Add your Supabase environment variables before using the dashboard on this deployment.
+            </CardDescription>
+          </CardHeader>
+        </Card>
+      </main>
+    );
+  }
+
+  const supabaseClient = supabase;
   const completion = calculateCompletion(payload);
   const profile = payload.profile;
 
   async function refreshData() {
     const [profileResult, projectResult, proofResult] = await Promise.all([
-      supabase.from("profiles").select("*").eq("user_id", user.id).maybeSingle(),
-      supabase.from("projects").select("*").order("created_at", { ascending: false }),
-      supabase.from("proofs").select("*").order("created_at", { ascending: false }),
+      supabaseClient.from("profiles").select("*").eq("user_id", user.id).maybeSingle(),
+      supabaseClient.from("projects").select("*").order("created_at", { ascending: false }),
+      supabaseClient.from("proofs").select("*").order("created_at", { ascending: false }),
     ]);
 
     const nextPayload: DashboardPayload = {
@@ -159,7 +175,7 @@ export function DashboardClient({ user, initialData }: { user: User; initialData
   async function saveProfile() {
     setSaving(true);
 
-    const { error } = await supabase.from("profiles").upsert(
+    const { error } = await supabaseClient.from("profiles").upsert(
       {
         user_id: user.id,
         full_name: profileForm.full_name.trim(),
@@ -201,7 +217,7 @@ export function DashboardClient({ user, initialData }: { user: User; initialData
       return;
     }
 
-    const { error } = await supabase.from("projects").insert({
+    const { error } = await supabaseClient.from("projects").insert({
       profile_id: payload.profile.id,
       title: projectForm.title.trim(),
       description: projectForm.description.trim() || null,
@@ -228,7 +244,7 @@ export function DashboardClient({ user, initialData }: { user: User; initialData
       return;
     }
 
-    const { error } = await supabase.from("proofs").insert({
+    const { error } = await supabaseClient.from("proofs").insert({
       profile_id: payload.profile.id,
       title: proofForm.title.trim(),
       type: proofForm.type,
@@ -247,7 +263,7 @@ export function DashboardClient({ user, initialData }: { user: User; initialData
   }
 
   async function removeItem(table: "projects" | "proofs", id: string) {
-    const { error } = await supabase.from(table).delete().eq("id", id);
+    const { error } = await supabaseClient.from(table).delete().eq("id", id);
 
     if (error) {
       toast.error(error.message);
@@ -298,7 +314,7 @@ export function DashboardClient({ user, initialData }: { user: User; initialData
   }
 
   async function logout() {
-    await supabase.auth.signOut();
+    await supabaseClient.auth.signOut();
     toast.success("Logged out");
     window.location.href = "/";
   }

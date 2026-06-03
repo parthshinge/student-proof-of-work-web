@@ -9,11 +9,14 @@ export const metadata: Metadata = {
 
 export default async function AuthRoute() {
   const supabase = await createSupabaseServerClient();
-  const { data } = await supabase.auth.getUser();
 
-  if (data.user) {
-    redirect("/dashboard");
+  if (supabase) {
+    const { data } = await supabase.auth.getUser();
+
+    if (data.user) {
+      redirect("/dashboard");
+    }
   }
 
-  return <AuthPage />;
+  return <AuthPage supabaseConfigured={Boolean(supabase)} />;
 }
