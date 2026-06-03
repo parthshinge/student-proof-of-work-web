@@ -768,7 +768,8 @@ function DialogShell({
             <h2 className="font-heading text-2xl font-semibold">{title}</h2>
           </div>
           <Button variant="ghost" size="icon" onClick={onClose}>
-            ×
+            <span aria-hidden="true">x</span>
+            <span className="sr-only">Close</span>
           </Button>
         </div>
         {children}

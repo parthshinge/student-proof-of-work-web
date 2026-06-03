@@ -69,6 +69,7 @@ export default async function PublicProfilePage({ params }: { params: Promise<{ 
   const projects = "projects" in profile ? profile.projects : [];
   const proofs = "proofs" in profile ? profile.proofs : [];
   const featuredProject = projects[0];
+  const academicSummary = [profile.branch, profile.year].filter(Boolean).join(" / ");
 
   return (
     <main className="container-shell py-10 lg:py-14">
@@ -93,9 +94,7 @@ export default async function PublicProfilePage({ params }: { params: Promise<{ 
               </div>
               <div className="space-y-2 text-sm text-[rgb(var(--muted-foreground))]">
                 <p>{profile.college}</p>
-                <p>
-                  {profile.branch} · {profile.year}
-                </p>
+                {academicSummary ? <p>{academicSummary}</p> : null}
                 <p>{profile.view_count ?? 0} public views</p>
               </div>
               <ProfileActions username={profile.username} walletAddress={profile.wallet_address} />

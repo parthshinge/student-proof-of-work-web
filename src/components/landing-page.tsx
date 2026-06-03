@@ -105,7 +105,7 @@ export function LandingPage() {
                 </div>
                 <div>
                   <p className="font-heading text-xl font-semibold">Aarav Mehta</p>
-                  <p className="text-sm text-slate-300">Computer Science Engineering · Final Year</p>
+                  <p className="text-sm text-slate-300">Computer Science Engineering / Final Year</p>
                 </div>
               </div>
               <div className="mt-4 flex flex-wrap gap-2">
