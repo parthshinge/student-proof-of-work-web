@@ -100,16 +100,16 @@ export function LandingPage() {
           <CardContent className="relative space-y-4">
             <div className="rounded-3xl border border-white/10 bg-white/10 p-5 backdrop-blur-md">
               <div className="flex items-center gap-4">
-                <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-sky-400/20 text-2xl font-semibold text-sky-100">
-                  AM
+                <div className="flex h-16 w-16 overflow-hidden rounded-3xl border-2 border-white/10 bg-sky-400/20">
+                  <img src="/parth-shinge.jpg" alt="Parth Shinge" className="h-full w-full object-cover" />
                 </div>
                 <div>
-                  <p className="font-heading text-xl font-semibold">Aarav Mehta</p>
-                  <p className="text-sm text-slate-300">Computer Science Engineering / Final Year</p>
+                  <p className="font-heading text-xl font-semibold">Parth Shinge</p>
+                  <p className="text-sm text-slate-300">AI & Machine Learning / Final Year</p>
                 </div>
               </div>
               <div className="mt-4 flex flex-wrap gap-2">
-                {["Next.js", "Supabase", "TypeScript", "System Design"].map((tag) => (
+                {["Python", "TensorFlow", "Power BI", "Scikit-learn"].map((tag) => (
                   <Badge key={tag} className="border-white/10 bg-white/10 text-white">
                     {tag}
                   </Badge>
