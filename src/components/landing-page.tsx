@@ -8,7 +8,6 @@ import {
   UploadCloud,
   Wallet,
 } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -47,8 +46,8 @@ export function LandingPage() {
       <section className="container-shell grid min-h-[calc(100vh-4rem)] items-center gap-14 py-16 lg:grid-cols-[1.1fr_0.9fr]">
         <div className="space-y-8">
           <div className="flex flex-wrap items-center gap-3">
-            <Badge className="bg-sky-500/10 text-sky-700 dark:text-sky-300">Recruiter-friendly SaaS profile builder</Badge>
-            <Badge className="bg-emerald-500/10 text-emerald-700 dark:text-emerald-300">Next.js 15 + Supabase</Badge>
+            <span className="inline-flex items-center rounded-full border border-sky-500/20 bg-sky-500/10 px-3 py-1 text-xs font-medium text-sky-700 dark:text-sky-300">Recruiter-friendly SaaS profile builder</span>
+            <span className="inline-flex items-center rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-700 dark:text-emerald-300">Next.js 15 + Supabase</span>
           </div>
 
           <div className="space-y-5">
@@ -86,33 +85,33 @@ export function LandingPage() {
           </div>
         </div>
 
-        <Card className="relative overflow-hidden border-white/20 bg-slate-950 text-white shadow-[0_30px_120px_rgba(15,23,42,0.35)]">
+        <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-slate-950 p-6 sm:p-8 text-white shadow-[0_30px_120px_rgba(15,23,42,0.35)]">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(56,189,248,0.35),transparent_30%),radial-gradient(circle_at_bottom_left,rgba(59,130,246,0.2),transparent_30%)]" />
-          <CardHeader className="relative">
+          <div className="relative mb-5 flex items-start justify-between gap-4">
             <div>
-              <Badge className="border-white/15 bg-white/10 text-white">Live proof preview</Badge>
-              <CardTitle className="mt-4 text-2xl text-white">A clean, recruiter&apos;s-eye profile</CardTitle>
-              <CardDescription className="mt-2 text-slate-300">
+              <span className="inline-flex items-center rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-medium text-white">Live proof preview</span>
+              <h3 className="mt-4 font-heading text-2xl font-bold tracking-tight text-white">A clean, recruiter&apos;s-eye profile</h3>
+              <p className="mt-2 text-sm text-slate-300">
                 The public profile combines evidence, credibility, and a crisp professional layout.
-              </CardDescription>
+              </p>
             </div>
-          </CardHeader>
-          <CardContent className="relative space-y-4">
+          </div>
+          <div className="relative space-y-4">
             <div className="rounded-3xl border border-white/10 bg-white/10 p-5 backdrop-blur-md">
               <div className="flex items-center gap-4">
                 <div className="flex h-16 w-16 overflow-hidden rounded-3xl border-2 border-white/10 bg-sky-400/20">
                   <img src="/parth-shinge.jpg" alt="Parth Shinge" className="h-full w-full object-cover" />
                 </div>
                 <div>
-                  <p className="font-heading text-xl font-semibold">Parth Shinge</p>
+                  <p className="font-heading text-xl font-semibold text-white">Parth Shinge</p>
                   <p className="text-sm text-slate-300">AI & Machine Learning / Final Year</p>
                 </div>
               </div>
               <div className="mt-4 flex flex-wrap gap-2">
                 {["Python", "TensorFlow", "Power BI", "Scikit-learn"].map((tag) => (
-                  <Badge key={tag} className="border-white/10 bg-white/10 text-white">
+                  <span key={tag} className="inline-flex items-center rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs font-medium text-white">
                     {tag}
-                  </Badge>
+                  </span>
                 ))}
               </div>
             </div>
@@ -122,22 +121,22 @@ export function LandingPage() {
                 <p className="flex items-center gap-2 text-sm text-slate-300">
                   <Sparkles className="h-4 w-4 text-emerald-300" /> Profile completion
                 </p>
-                <p className="mt-2 text-3xl font-semibold">92%</p>
+                <p className="mt-2 text-3xl font-semibold text-white">92%</p>
               </div>
               <div className="rounded-3xl border border-white/10 bg-white/8 p-5">
                 <p className="flex items-center gap-2 text-sm text-slate-300">
                   <BadgeCheck className="h-4 w-4 text-sky-300" /> Proof uploads
                 </p>
-                <p className="mt-2 text-3xl font-semibold">6 verified assets</p>
+                <p className="mt-2 text-3xl font-semibold text-white">6 verified assets</p>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </section>
 
       <section id="features" className="section-padding container-shell">
         <div className="mb-8 max-w-2xl space-y-4">
-          <Badge className="bg-slate-900 text-white dark:bg-white dark:text-slate-950">Features</Badge>
+          <span className="inline-flex items-center rounded-full border border-transparent bg-slate-900 px-3 py-1 text-xs font-medium text-white dark:bg-white dark:text-slate-950">Features</span>
           <h2 className="font-heading text-3xl font-semibold tracking-tight sm:text-4xl">
             Built for credibility, speed, and mobile browsing.
           </h2>
@@ -170,7 +169,7 @@ export function LandingPage() {
         <Card className="overflow-hidden">
           <div className="grid gap-0 lg:grid-cols-[0.9fr_1.1fr]">
             <div className="border-b border-[rgb(var(--border))] p-8 lg:border-b-0 lg:border-r">
-              <Badge>How it works</Badge>
+              <span className="inline-flex items-center rounded-full border border-[rgb(var(--border))] bg-white/70 px-3 py-1 text-xs font-medium text-[rgb(var(--foreground))] dark:bg-slate-950/40">How it works</span>
               <h2 className="mt-4 font-heading text-3xl font-semibold tracking-tight">
                 Publish your proof in three clear steps.
               </h2>
@@ -206,11 +205,11 @@ export function LandingPage() {
       </section>
 
       <section className="section-padding container-shell">
-        <Card className="bg-[linear-gradient(135deg,rgba(15,23,42,0.96),rgba(30,41,59,0.94))] text-white">
+        <div className="rounded-3xl border border-slate-800 bg-[linear-gradient(135deg,rgba(15,23,42,0.96),rgba(30,41,59,0.94))] p-6 sm:p-8 text-white shadow-2xl">
           <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
             <div>
-              <Badge className="border-white/15 bg-white/10 text-white">Call to action</Badge>
-              <h2 className="mt-4 font-heading text-3xl font-semibold tracking-tight sm:text-4xl">
+              <span className="inline-flex items-center rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-medium text-white">Call to action</span>
+              <h2 className="mt-4 font-heading text-3xl font-semibold tracking-tight sm:text-4xl text-white">
                 Ship your public student profile today.
               </h2>
               <p className="mt-4 max-w-2xl text-slate-300">
@@ -227,7 +226,7 @@ export function LandingPage() {
               </Button>
             </div>
           </div>
-        </Card>
+        </div>
       </section>
     </main>
   );
