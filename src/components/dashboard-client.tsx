@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { calculateCompletion } from "@/lib/completion";
+import { getDirectImageUrl } from "@/lib/utils";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 import type { DashboardPayload, ProofRecord, ProofType, ProjectRecord, ProfileRecord } from "@/lib/types";
 import { Badge } from "@/components/ui/badge";
@@ -180,7 +181,7 @@ export function DashboardClient({ user, initialData }: { user: User; initialData
         user_id: user.id,
         full_name: profileForm.full_name.trim(),
         username: profileForm.username.trim().toLowerCase(),
-        profile_picture_url: profileForm.profile_picture_url.trim() || null,
+        profile_picture_url: getDirectImageUrl(profileForm.profile_picture_url) || null,
         college: profileForm.college.trim() || null,
         branch: profileForm.branch.trim() || null,
         year: profileForm.year.trim() || null,
@@ -224,7 +225,7 @@ export function DashboardClient({ user, initialData }: { user: User; initialData
       tech_stack: splitValues(projectForm.tech_stack),
       github_url: projectForm.github_url.trim() || null,
       demo_url: projectForm.demo_url.trim() || null,
-      image_url: projectForm.image_url.trim() || null,
+      image_url: getDirectImageUrl(projectForm.image_url) || null,
     });
 
     if (error) {
@@ -248,7 +249,7 @@ export function DashboardClient({ user, initialData }: { user: User; initialData
       profile_id: payload.profile.id,
       title: proofForm.title.trim(),
       type: proofForm.type,
-      image_url: proofForm.image_url.trim() || null,
+      image_url: getDirectImageUrl(proofForm.image_url) || null,
     });
 
     if (error) {
